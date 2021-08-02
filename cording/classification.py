@@ -40,3 +40,26 @@ width = feature_importance
 
 # plt.barh(y=y, width=width)
 # plt.show()
+
+from sklearn.svm import SVC
+
+model = SVC()
+model.fit(x_train, t_train)
+print(f'train score: {model.score(x_train, t_train)}')
+print(f'test score: {model.score(x_test, t_test)}')
+
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+scaler.fit(x_train)
+x_train_std = scaler.transform(x_train)
+x_test_std = scaler.transform(x_test)
+
+model_std = SVC(C=1, gamma=0.01)
+model_std.fit(x_train_std, t_train)
+print(f'train score: {model.score(x_train, t_train)}')
+print(f'test score: {model.score(x_test, t_test)}')
+print('================================')
+print(f'train score: {model_std.score(x_train_std, t_train)}')
+print(f'test score: {model_std.score(x_test_std, t_test)}')
+
